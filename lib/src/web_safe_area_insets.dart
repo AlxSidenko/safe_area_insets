@@ -5,6 +5,8 @@ import 'package:safe_area_insets/safe_area_insets.dart';
 
 typedef SafeAreaInsetsChangedCallback = void Function(EdgeInsets insets);
 
+late EdgeInsets webInsets;
+
 /// Created by ipcjs on 2022/12/8.
 class WebSafeAreaInsets extends StatelessWidget {
   const WebSafeAreaInsets({
@@ -26,6 +28,7 @@ class WebSafeAreaInsets extends StatelessWidget {
       stream: safeAreaInsetsStream,
       builder: (context, snapshot) {
         final insets = snapshot.data ?? safeAreaInsets;
+        webInsets = insets;
         return MediaQuery(
           data: data.copyWith(
             viewPadding: insets,

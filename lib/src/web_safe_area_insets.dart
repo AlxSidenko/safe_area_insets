@@ -28,12 +28,12 @@ class WebSafeAreaInsets extends StatelessWidget {
       stream: safeAreaInsetsStream,
       builder: (context, snapshot) {
         final insets = snapshot.data ?? safeAreaInsets;
-        webInsets = insets;
+        webInsets = (insets - data.viewInsets)
+            .clamp(EdgeInsets.zero, EdgeInsetsGeometry.infinity) as EdgeInsets;
         return MediaQuery(
           data: data.copyWith(
             viewPadding: insets,
-            padding: (insets - data.viewInsets).clamp(
-                EdgeInsets.zero, EdgeInsetsGeometry.infinity) as EdgeInsets,
+            padding: webInsets,
           ),
           child: child,
         );
